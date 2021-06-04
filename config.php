@@ -7,7 +7,7 @@
 $servidor = 'localhost';
 $usuario = 'root';
 $senha = '';
-$banco = 'php8';
+$banco = 'simples';
 
 
 /*

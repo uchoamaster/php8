@@ -19,7 +19,7 @@ echo 'Nome do Usuário : ' . $_SESSION['nome_usuario'] .' e o nível do usuário
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Painél Administrativo</title>
+	<title>Painel Administrativo</title>
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
@@ -67,9 +67,9 @@ echo 'Nome do Usuário : ' . $_SESSION['nome_usuario'] .' e o nível do usuário
 
 		<?php
 		$txtBuscar = '%' .@$_GET['txtBuscar']. '%';
-		$query = $pdo->prepare("SELECT * FROM usuarios where nome LIKE :nome or email LIKE :email ");
-		$query->bindValue(":email", $txtBuscar);
-		$query->bindValue(":nome", $txtBuscar);
+		$query = $pdo->prepare("SELECT * FROM cidade where Codigo_Cidade LIKE :Codigo_Cidade or Nome LIKE :Nome ");
+		$query->bindValue(":Codigo_Cidade", $txtBuscar);
+		$query->bindValue(":Nome", $txtBuscar);
 		$query->execute();
 		$res = $query->fetchAll(PDO::FETCH_ASSOC);
 		$total_reg = @count($res);
@@ -81,11 +81,24 @@ echo 'Nome do Usuário : ' . $_SESSION['nome_usuario'] .' e o nível do usuário
 			<table class="table table-striped mt-4">
 				<thead>
 					<tr>
+						<!-- <th scope="col">Dominio</th> -->
+						<th scope="col">Codigo_Cidade</th>
+						<th scope="col">Codigo_Pais</th>
+						<th scope="col">UF</th>
 						<th scope="col">Nome</th>
-						<th scope="col">Email</th>
-						<th scope="col">Senha</th>
-						<th scope="col">Nível</th>
-						<th scope="col">Ações</th>
+						<th scope="col">Situacao</th> 
+						<!-- <th scope="col">Perfil_Atual</th>
+						<th scope="col">Limite_Credito</th> -->
+						<!-- <th scope="col">Usa_Caixa</th>
+						<th scope="col">Terminais</th> -->
+						<!-- <th scope="col">Cliente</th>
+						<th scope="col">Tipo_Preco</th>  -->
+						<th scope="col">Gentilico</th> 
+						<!-- <th scope="col">Regiao</th> 
+						<th scope="col">CodSIAFI</th>  -->
+						<th scope="col"></th> 
+						<th scope="col"></th> 
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -96,28 +109,47 @@ echo 'Nome do Usuário : ' . $_SESSION['nome_usuario'] .' e o nível do usuário
 						foreach ($res[$i] as $key => $value){
 
 						}
-						$nome = $res[$i]['nome'];
-						$email = $res[$i]['email'];
-						$senha = $res[$i]['senha'];
-						$nivel = $res[$i]['nivel'];
-						$id = $res[$i]['id'];
+						// $dominio = $res[$i]['Dominio'];
+						$ccidade = $res[$i]['Codigo_Cidade'];
+						$cpais = $res[$i]['Codigo_Pais'];
+						$uf = $res[$i]['UF'];
+						$nome = $res[$i]['Nome'];
+						$situacao = $res[$i]['Situacao'];
+						$gentilico = $res[$i]['Gentilico'];
+						// $regiao = $res[$i]['Regiao'];
+						// $ucaixa = $res[$i]['Usa_Caixa'];
+						// $terminais = $res[$i]['Terminais'];
+						// $cliente = $res[$i]['Cliente'];
+						// $tipo_Preco = $res[$i]['Tipo_Preco']; 
+						// $csiafi = $res[$i]['CodSIAFI']; 
+						
 
 						?>
 
 						<tr>
+							<!-- <td><?php echo $dominio ?></td> -->
+							<td><?php echo $ccidade ?></td>
+							<td><?php echo $cpais ?></td>
+							<td><?php echo $uf ?></td>
 							<td><?php echo $nome ?></td>
-							<td><?php echo $email ?></td>
-							<td><?php echo $senha ?></td>
-							<td><?php echo $nivel ?></td>
+							<td><?php echo $situacao ?></td>
+							<td><?php echo $gentilico ?></td> 
+							<td></td> 
+							<!-- <td><?php echo $regiao ?></td> -->
+							<!-- <td><?php echo $csiafi ?></td> -->
+							<!-- <td><?php echo $ucaixa ?></td>
+							<td><?php echo $terminais ?></td>
+							<td><?php echo $cliente ?></td>
+							<td><?php echo $tipo_Preco ?></td> -->
 							<td>
-								<a href="index.php?funcao=editar&id=<?php echo $id ?>" title="Editar Registro" class="mr-1">
+								<a href="index.php?funcao=editar&id=<?php echo $ccidade ?>" title="Editar Registro" class="mr-1">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square text-primary" viewBox="0 0 16 16">
 										<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
 										<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 									</svg>
 								</a>
 
-								<a href="index.php?funcao=deletar&id=<?php echo $id ?>" title="Deletar Registro" class="mr-1">
+								<a href="index.php?funcao=deletar&id=<?php echo $ccidade ?>" title="Deletar Registro" class="mr-1">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive text-danger" viewBox="0 0 16 16">
 										<path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
 									</svg>
@@ -156,12 +188,14 @@ echo 'Nome do Usuário : ' . $_SESSION['nome_usuario'] .' e o nível do usuário
 					$titulo_modal = "Editar Registro";
 					$botao_modal = "btn-editar";
 
-					$query = $pdo->query("SELECT * FROM usuarios where id = '$_GET[id]'");
+					$query = $pdo->query("SELECT * FROM cidade where Codigo_Cidade = '$_GET[Codigo_Cidade]'");
 					$res = $query->fetchAll(PDO::FETCH_ASSOC);
-					$nome_ed = $res[0]['nome'];
-					$email_ed = $res[0]['email'];
-					$senha_ed = $res[0]['senha'];
-					$nivel_ed = $res[0]['nivel'];
+					$ccidade = $res[0]['Codigo_Cidade'];
+					$cpais = $res[0]['Codigo_pais'];
+					$uf = $res[0]['UF'];
+					$nome = $res[0]['Nome'];
+					$situacao = $res[0]['Situacao'];
+					$gentilico = $res[0]['Gentilico'];
 
 				}else{
 					$titulo_modal = "Inserir Registro";
@@ -315,7 +349,7 @@ if(isset($_POST['btn-editar'])){
 if(isset($_POST['btn-deletar'])){
 
 	
-	$query = $pdo->query("DELETE from usuarios WHERE id = '$_GET[id]'");
+	$query = $pdo->query("DELETE from cidade WHERE Codigo_Cidade = '$_GET[Codigo_Cidade]'");
 	
 	echo "<script language='javascript'>window.location='index.php'</script>";
 

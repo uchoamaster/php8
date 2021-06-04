@@ -21,11 +21,11 @@ require_once("../conexao.php");
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Usuário:</label><br>
-                                <input type="text" name="email" id="username" class="form-control" placeholder="Insira seu Email" required>
+                                <input type="text" name="Usuario" id="Usuario" class="form-control" placeholder="Insira seu Email" required>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Senha:</label><br>
-                                <input type="password" name="senha" id="password" class="form-control" placeholder="Insira sua Senha" required>
+                                <input type="password" name="Senha" id="Senha" class="form-control" placeholder="Insira sua Senha" required>
                             </div>
                             <div class="form-group">
 
@@ -59,13 +59,13 @@ require_once("../conexao.php");
 
             <div class="form-group">
                 <label for="exampleInputEmail1">Nome</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="nomeCad" aria-describedby="emailHelp" required="">
+                <input type="text" class="form-control" id="exampleInputEmail1" name="usuarioCad" aria-describedby="emailHelp" required="">
 
             </div>
 
             <div class="form-group">
                 <label for="exampleInputEmail1">Email </label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="emailCad" aria-describedby="emailHelp" required="">
+                <input type="text" class="form-control" id="exampleInputEmail1" name="nomeCad" aria-describedby="emailHelp" required="">
 
             </div>
 
@@ -89,11 +89,11 @@ require_once("../conexao.php");
 <?php 
 if(isset($_POST['btn-cadastrar'])){
         
-    $query = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, nivel) VALUES (:nome, :email, :senha, :nivel)");
-    $query->bindValue(":nome", $_POST['nomeCad']);
-    $query->bindValue(":email", $_POST['emailCad']);
-    $query->bindValue(":senha", $_POST['senhaCad']);
-    $query->bindValue(":nivel", 'Cliente');
+    $query = $pdo->prepare("INSERT INTO usuario (Usuario, Nome, Senha, Nivel) VALUES (:Usuario, :Nome, :Senha, :Nivel)");
+    $query->bindValue(":Usuario", $_POST['usuarioCad']);
+    $query->bindValue(":Nome", $_POST['nomeCad']);
+    $query->bindValue(":Senha", $_POST['senhaCad']);
+    $query->bindValue(":Nivel", 'Cliente');
     $query->execute();
 
     echo "<script language='javascript'>window.alert('Cadastrado com Sucesso')</script>";

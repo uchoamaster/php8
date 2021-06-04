@@ -3,12 +3,12 @@
 require_once("../conexao.php");
 @session_start();
 
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+$usuario = $_POST['Usuario'];
+$senha = $_POST['Senha'];
 
-$query = $pdo->prepare("SELECT * FROM usuarios where email = :email and senha = :senha");
-	$query->bindValue(":email", $email);
-	$query->bindValue(":senha", $senha);
+$query = $pdo->prepare("SELECT * FROM usuario where Usuario = :Usuario and Senha = :Senha");
+	$query->bindValue(":Usuario", $usuario);
+	$query->bindValue(":Senha", $senha);
 	$query->execute();
 
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -19,10 +19,10 @@ $query = $pdo->prepare("SELECT * FROM usuarios where email = :email and senha = 
 	if($total_reg > 0){
 
 		//CRIAR AS VARIAVEIS DE SESSÃO
-		$_SESSION['nome_usuario'] = $res[0]['nome'];
-		$_SESSION['nivel_usuario'] = $res[0]['nivel'];
+		$_SESSION['nome_usuario'] = $res[0]['Nome'];
+		$_SESSION['nivel_usuario'] = $res[0]['Nivel'];
 
-		$nivel = $res[0]['nivel'];
+		$nivel = $res[0]['Nivel'];
 
 		if($nivel == 'Administrador'){
 			echo "<script language='javascript'>window.location='painel-adm'</script>";
